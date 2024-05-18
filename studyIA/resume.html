@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo de Texto</title>
+</head>
+
+<body>
+    <h1>Carregar e Resumir Texto</h1>
+    <input type="file" id="fileInput" accept=".txt">
+    <button id="summarizeButton">Resumir</button>
+    <h2>Resumo</h2>
+    <p id="summary"></p>
+
+    <script>
+        document.getElementById('summarizeButton').onclick = function () {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('Por favor, carregue um arquivo de texto.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const text = event.target.result;
+                const summary = summarizeText(text);
+                document.getElementById('summary').innerText = summary;
+            };
+
+            reader.readAsText(file);
+        };
+
+        function summarizeText(text) {
+            // Dividir o texto em sentenças
+            const sentences = text.split('.').filter(sentence => sentence.trim().length > 0);
+            const numberOfSentences = Math.min(sentences.length, 3); // Resumir para as 3 primeiras sentenças
+
+            // Juntar as sentenças para formar o resumo
+            const summary = sentences.slice(0, numberOfSentences).join('. ') + '.';
+            return summary;
+        }
+    </script>
+</body>
+
+</html>

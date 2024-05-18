@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jogo de Adivinhação</title>
+  </head>
+  <body>
+    <h1>Jogo de Adivinhação</h1>
+    <button id="guessButton">Adivinhar</button>
+    <p id="result"></p>
+
+    <script>
+      let min = 1;
+      let max = 100;
+      let attempts = 0;
+
+      document.getElementById("guessButton").onclick = function () {
+        attempts++;
+        let guess = Math.floor((min + max) / 2);
+        let userResponse = prompt(`O número é ${guess}? (sim/não/maior/menor)`);
+
+        if (userResponse === "sim") {
+          document.getElementById(
+            "result"
+          ).innerText = `Adivinhei o número em ${attempts} tentativas!`;
+        }  else if (userResponse === "não") {
+
+        } else if (userResponse === "menor") {
+            max = guess - 2;
+        }
+        
+        else if (userResponse === "maior") {
+          min = guess + 1;
+        } else if (userResponse === "menor") {
+          max = guess - 1;
+        }
+      };
+    </script>
+  </body>
+</html>
